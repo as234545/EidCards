@@ -8,7 +8,7 @@ package main
 import (
 
 	// "fmt" has methods for formatted I/O operations (like printing to the console)
-
+	"fmt"
 	"log"
 
 	// The "net/http" library has methods to implement HTTP clients and servers
@@ -23,14 +23,11 @@ type Student struct {
 	TextHight int
 	TextWidth int
 	Fonts     string
-}
-
-type User struct {
-	Name string
+	ImgH      string
+	ImgL      string
 }
 
 func main() {
-
 	// The "HandleFunc" method accepts a path and a function as arguments
 	// (Yes, we can pass functions as arguments, and even treat them like variables in Go)
 	http.HandleFunc("/", index)
@@ -45,11 +42,20 @@ func main() {
 	http.HandleFunc("/card7", card7)
 	http.HandleFunc("/card8", card8)
 	http.HandleFunc("/card9", card9)
+	http.HandleFunc("/.well-known/pki-validation", pki)
 
 	// After defining our server, we finally "listen and serve" on port 8080
 	// The second argument is the handler, which we will come to later on, but for now it is left as nil,
 	// and the handler defined above (in "HandleFunc") is used
-	http.ListenAndServe(":8080", nil)
+	//http.ListenAndServe(":8080", nil)
+	fmt.Print("shit")
+	http.ListenAndServe("0.0.0.0:443", nil)
+
+}
+
+func pki(w http.ResponseWriter, r *http.Request) {
+	t, _ := template.ParseFiles("templates/B7EC8F3F04817DDBA99115E94B99B388.txt") //index4
+	t.Execute(w, t)
 }
 
 func index(w http.ResponseWriter, r *http.Request) {
@@ -74,6 +80,8 @@ func card1(w http.ResponseWriter, r *http.Request) {
 		TextHight: 115,
 		TextWidth: 5,
 		Fonts:     "/static/fonts/FontsFree-Net-din-next-arabic-bold.ttf",
+		ImgH:      "800",
+		ImgL:      "1000",
 	}
 	parsedTemplate, _ := template.ParseFiles("templates/testpreview2.html")
 	err := parsedTemplate.Execute(w, student)
@@ -90,6 +98,8 @@ func card2(w http.ResponseWriter, r *http.Request) {
 		Colors:    "rgb(255, 255, 255)",
 		TextHight: 400,
 		TextWidth: 5,
+		ImgH:      "1667",
+		ImgL:      "2084",
 	}
 	parsedTemplate, _ := template.ParseFiles("templates/testpreview2.html")
 	err := parsedTemplate.Execute(w, student)
@@ -106,6 +116,8 @@ func card3(w http.ResponseWriter, r *http.Request) {
 		Colors:    "rgb(86, 134, 135)",
 		TextHight: 150,
 		TextWidth: 0,
+		ImgH:      "800",
+		ImgL:      "1000",
 	}
 	parsedTemplate, _ := template.ParseFiles("templates/testpreview2.html")
 	err := parsedTemplate.Execute(w, student)
@@ -122,6 +134,8 @@ func card4(w http.ResponseWriter, r *http.Request) {
 		Colors:    "rgb(131, 158, 188)",
 		TextHight: 300,
 		TextWidth: 200,
+		ImgH:      "800",
+		ImgL:      "1000",
 	}
 	parsedTemplate, _ := template.ParseFiles("templates/testpreview2.html")
 	err := parsedTemplate.Execute(w, student)
@@ -138,6 +152,8 @@ func card5(w http.ResponseWriter, r *http.Request) {
 		Colors:    "rgb(255, 255, 255)",
 		TextHight: 170,
 		TextWidth: 5,
+		ImgH:      "800",
+		ImgL:      "1000",
 	}
 	parsedTemplate, _ := template.ParseFiles("templates/testpreview2.html")
 	err := parsedTemplate.Execute(w, student)
@@ -154,6 +170,8 @@ func card6(w http.ResponseWriter, r *http.Request) {
 		Colors:    "rgb(123, 106, 98)",
 		TextHight: 400,
 		TextWidth: 5,
+		ImgH:      "1667",
+		ImgL:      "2084",
 	}
 	parsedTemplate, _ := template.ParseFiles("templates/testpreview2.html")
 	err := parsedTemplate.Execute(w, student)
@@ -169,6 +187,8 @@ func card7(w http.ResponseWriter, r *http.Request) {
 		Colors:    "rgb(0, 0, 0)",
 		TextHight: 300,
 		TextWidth: 5,
+		ImgH:      "1667",
+		ImgL:      "2084",
 	}
 	parsedTemplate, _ := template.ParseFiles("templates/testpreview2.html")
 	err := parsedTemplate.Execute(w, student)
@@ -185,6 +205,8 @@ func card8(w http.ResponseWriter, r *http.Request) {
 		Colors:    "rgb(255, 255, 255)",
 		TextHight: 150,
 		TextWidth: 5,
+		ImgH:      "800",
+		ImgL:      "1000",
 	}
 	parsedTemplate, _ := template.ParseFiles("templates/testpreview2.html")
 	err := parsedTemplate.Execute(w, student)
@@ -201,6 +223,8 @@ func card9(w http.ResponseWriter, r *http.Request) {
 		Colors:    "rgb(82, 88, 114)",
 		TextHight: 380,
 		TextWidth: 5,
+		ImgH:      "1667",
+		ImgL:      "2084",
 	}
 	parsedTemplate, _ := template.ParseFiles("templates/testpreview2.html")
 	err := parsedTemplate.Execute(w, student)
