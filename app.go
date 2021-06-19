@@ -48,7 +48,7 @@ func main() {
 	// The second argument is the handler, which we will come to later on, but for now it is left as nil,
 	// and the handler defined above (in "HandleFunc") is used
 	//http.ListenAndServe(":8080", nil)
-	fmt.Print("shit")
+	
 	http.ListenAndServe("0.0.0.0:443", nil)
 
 }
